@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pedido Concluído</title>
+<style>
+  /* Reset básico */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa, #e4ecf5);
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    padding: 1rem;
+    animation: fadeInBody 0.8s ease-in-out;
+  }
+
+  h1 {
+    font-size: 3rem;
+    color: #4a4af7;
+    margin-bottom: 1rem;
+    animation: slideUp 1s ease-out;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: #555;
+    max-width: 500px;
+    animation: slideUp 1.4s ease-out;
+  }
+
+  .redirect-msg {
+    margin-top: 2rem;
+    font-size: 0.95rem;
+    color: #888;
+    animation: fadeInText 2s ease-in-out;
+  }
+
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeInBody {
+    from {
+      background-color: #fff;
+      opacity: 0;
+    }
+    to {
+      background-color: #f5f7fa;
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeInText {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+</style>
+
+</head>
+<body>
+  <canvas id="confetti-canvas"></canvas>
+  <h1>Pedido Concluído!</h1>
+  <p>Obrigado pela compra. Seu pedido foi processado com sucesso.</p>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    const canvas = document.getElementById('confetti-canvas');
+    const confetti = window.confetti.create(canvas, { resize: true, useWorker: true });
+
+    const interval = setInterval(() => {
+      confetti({ particleCount: 50, spread: 60, origin: { x: 0, y: 0.6 } });
+      confetti({ particleCount: 50, spread: 60, origin: { x: 1, y: 0.6 } });
+    }, 400);
+
+    setTimeout(() => {
+      clearInterval(interval);
+      window.location.href = "index.html"; 
+    }, 6000); // ⏳ 5 segundos
+  </script>
+</body>
+</html>
